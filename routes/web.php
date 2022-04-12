@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('login', function () {
-    return view('login');
-})->name('login');
-
 Route::get('checkout', function () {
     return view('checkout');
 })->name('checkout');
@@ -28,6 +24,11 @@ Route::get('checkout', function () {
 Route::get('success', function () {
     return view('success');
 })->name('success');
+
+// socialite routes
+Route::get('sign-in-google', [UserController::class, 'google'])->name('user-login-google');
+Route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
